@@ -88,7 +88,7 @@ PurePursuitNode::PurePursuitNode(const rclcpp::NodeOptions & node_options)//这�
   //发布调试用的可视化标记
 
   //曲率 Publishers
-  pub_curvature_ = this->create_publisher<std_msgs::msg::Float32>("/extra_cur",1);
+  // pub_curvature_ = this->create_publisher<std_msgs::msg::Float32>("/extra_cur",1);
   // Timer
   {
     const auto period_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
@@ -144,23 +144,23 @@ void PurePursuitNode::onTimer()//通过定时器触发。所以是不断触发�
 
   if (target_curvature) {
     publishCommand(*target_curvature);
-    publishCurvature(*target_curvature);
+    
     publishDebugMarker();
   } else {
     RCLCPP_WARN_THROTTLE(get_logger(), *get_clock(), 5000, "failed to solve pure_pursuit");
     publishCommand({0.0});
-    publishCurvature(0.0);
+    
   }
 
 
 }
 
-void PurePursuitNode::publishCurvature(const double target_curvature);
-{
-  std_msgs::msg::Float32 msg;
-  msg.data = target_curvature;
-  pub_curvature_->publish(msg);
-}
+// void PurePursuitNode::publishCurvature(const double target_curvature);
+// {
+//   std_msgs::msg::Float32 msg;
+//   msg.data = target_curvature;
+//   pub_curvature_->publish(msg);
+// }
 
 
 void PurePursuitNode::publishCommand(const double target_curvature)
