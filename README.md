@@ -17,3 +17,5 @@ Return LateralOutput which contains the following to the controller node
 - LateralSyncData
   - steer angle convergence
 - `autoware_auto_planning_msgs/Trajectory`: predicted path for ego vehicle
+
+硬改了部分内容 把曲率直接发布出去了
